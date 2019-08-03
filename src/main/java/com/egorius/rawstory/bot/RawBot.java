@@ -18,7 +18,7 @@ public class RawBot extends TelegramLongPollingBot {
     private static final String BOT_USERNAME = "raw_story_bot";
     private static final String BOT_TOKEN = "876212460:AAFXA1t7epiicYunoWbnZnbvxwMaNhX4PCg";
     private static final String TAG = "HandBot message";
-    private static final String VERSION = "1.0.3";
+    private static final String VERSION = "1.0.4";
 
     private static final String testURL = "http://192.168.1.251:8080/blog/add";
 
