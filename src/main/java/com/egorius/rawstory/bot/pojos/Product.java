@@ -3,6 +3,7 @@ package com.egorius.rawstory.bot.pojos;
 import java.util.Arrays;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class Product {
 
     private long id = -1;
@@ -16,7 +17,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, String[] paths) {
+    Product(String name, String description, String[] paths) {
         this.name = name;
         this.description = description;
         this.paths = paths;
@@ -86,7 +87,6 @@ public class Product {
     public String toString() {
         return "Продукт"+ '\n' +
                 "Название продукта: " + name + '\n' +
-                "Описание продукта: " + description +  '\n' +
-                "Картинки: " + Arrays.toString(paths) + '\n';
+                "Описание продукта: " + description +  '\n';
     }
 }

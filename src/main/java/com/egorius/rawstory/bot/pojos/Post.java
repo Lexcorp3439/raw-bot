@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class Post{
 
     private long id = -1;
@@ -82,8 +83,7 @@ public class Post{
         return "Пост" + '\n' +
                 "Навзвание поста: " + name + '\n' +
                 "Дата создания: " + date + '\n' +
-                "Описание поста: " + description + '\n' +
-                "Картинки: " + Arrays.toString(paths);
+                "Описание поста: " + description + '\n';
     }
 
     @Override
