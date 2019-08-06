@@ -1,5 +1,6 @@
 package com.egorius.rawstory.bot.pojos;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -12,30 +13,17 @@ public class Product {
 
     private String description;
 
-    private String[] paths = new String[]{};
+    private String[] paths;
 
-    public Product() {
-    }
+    private BigDecimal cost;
 
-    Product(String name, String description, String[] paths) {
-        this.name = name;
-        this.description = description;
-        this.paths = paths;
-    }
+    private int cal;
 
-    public Product(int id, String name, String description, String[] paths) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
+    private int squirrels;
 
-    public long getId() {
-        return id;
-    }
+    private int fats;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    private int carbohydrates;
 
     public String getName() {
         return name;
@@ -61,32 +49,88 @@ public class Product {
         this.paths = paths;
     }
 
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public int getSquirrels() {
+        return squirrels;
+    }
+
+    public void setSquirrels(int squirrels) {
+        this.squirrels = squirrels;
+    }
+
+    public int getFats() {
+        return fats;
+    }
+
+    public void setFats(int fats) {
+        this.fats = fats;
+    }
+
+    public int getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public void setCarbohydrates(int carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
+    public int getCal() {
+        return cal;
+    }
+
+    public void setCal(int cal) {
+        this.cal = cal;
+    }
+
+    public Product(String name, String description, String[] paths, BigDecimal cost, int cal, int squirrels, int fats, int carbohydrates) {
+        this.name = name;
+        this.description = description;
+        this.paths = paths;
+        this.cost = cost;
+        this.cal = cal;
+        this.squirrels = squirrels;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id &&
+        return cal == product.cal &&
+                squirrels == product.squirrels &&
+                fats == product.fats &&
+                carbohydrates == product.carbohydrates &&
                 name.equals(product.name) &&
                 description.equals(product.description) &&
-                Arrays.equals(paths, product.paths);
+                Arrays.equals(paths, product.paths) &&
+                cost.equals(product.cost);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, name, description);
+        int result = Objects.hash(name, description, cost, cal, squirrels, fats, carbohydrates);
         result = 31 * result + Arrays.hashCode(paths);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Продукт"+ '\n' +
-                "Название продукта: " + name + '\n' +
-                "Описание продукта: " + description +  '\n';
+        return "Продукт" +
+                "Название продукта:'" + name + '\'' +
+                "Описание продукта'" + description + '\'' +
+                "Цена:" + cost +
+                "Калории: " + cal +
+                "Белки: " + squirrels +
+                "Жиры: " + fats +
+                "Углеводы" + carbohydrates;
     }
 }

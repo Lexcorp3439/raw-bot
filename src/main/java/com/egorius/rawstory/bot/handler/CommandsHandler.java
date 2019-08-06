@@ -1,5 +1,6 @@
 package com.egorius.rawstory.bot.handler;
 
+import com.egorius.rawstory.bot.connect.RequestRunner;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class CommandsHandler {

@@ -99,6 +99,7 @@ class Step {
                 new Action(Act.No, new String[]{});
             case Messages.Button.save:
                 handler.constructor.save();
+                handler.constructor.clear();
                 handler.drop();
                 return new Action(Act.Message, answer6);
             case Messages.Button.check:

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.egorius.rawstory.bot.connect.Connector;
+import com.egorius.rawstory.bot.connect.RequestRunner;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -92,6 +94,7 @@ public class RawBot extends TelegramLongPollingBot {
             case Messages.Commands.auth + password:
                 if (!a) {
                     handlers.put(msg.getChatId(), new MessageHandler(msg.getChatId()));
+                    Connector.putChatId(msg.getChatId());
                 }
                 return CommandsHandler.auth(a);
         }

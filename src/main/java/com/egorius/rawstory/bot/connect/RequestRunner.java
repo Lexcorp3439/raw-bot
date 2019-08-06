@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
-import com.egorius.rawstory.bot.pojos.Post;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public enum  RequestRunner {
@@ -16,7 +14,7 @@ public enum  RequestRunner {
 
     private static final int CONNECTION_TIMEOUT = 0;
 
-    public Post doPost(String u, Object object) throws Exception{
+    public InputStream doPost(String u, Object object) throws Exception{
         URL url = new URL(u);
         final HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
@@ -34,17 +32,16 @@ public enum  RequestRunner {
         out.flush();
         out.close();
 
-        Post ans = mapper.readValue(con.getInputStream(), Post.class);
+        InputStream stream = con.getInputStream();
         con.disconnect();
 
-        System.out.println("Good");
-        return ans;
+        return stream;
     }
 
-    public InputStream doGet(String u) throws Exception{
+    public InputStream doPut(String u) throws Exception{
         URL url = new URL(u);
         final HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
+        con.setRequestMethod("PUT");
         con.setRequestProperty("Content-Type", "application/json");
         con.setConnectTimeout(CONNECTION_TIMEOUT);
         con.setReadTimeout(CONNECTION_TIMEOUT);
