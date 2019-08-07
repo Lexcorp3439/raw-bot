@@ -22,35 +22,22 @@ public class RequestsTest {
 
 
     @Test
-    public void sendPost() throws Exception {
+    public void sendPost() {
         Post post = new Post("name5", "description5", new String[]{id});
         Request request = Connector.sendPost(post);
         assertTrue(request instanceof Request.Success);
 
-        System.out.println(((Post)((Request.Success) request).getObject()).toString());
+        System.out.println(((Request.Success) request).getObject().toString());
 
     }
 
     @Test
-    public void sendProduct() throws Exception {
+    public void sendProduct() {
         Product product = new Product("Test name5", "Test description5", new String[]{id}, new BigDecimal(124),
                 150, 50, 50, 50);
         Request request = Connector.sendProduct(product);
         assertTrue(request instanceof Request.Success);
 
-        System.out.println(((Product)((Request.Success) request).getObject()).toString());
+        System.out.println(((Request.Success) request).getObject().toString());
     }
-
-
-//    @Test
-//    public void doPostWithProxy() throws Exception {
-//        Properties.setProxy();
-//        Properties.removeProxy();
-//
-//        Post post = new Post("Test name5", "Test description5", new String[]{id});
-//        Post ans = RequestRunner.Instance.doPost(testURL, post);
-//        assertEquals(ans.getPaths()[0], resource.concat(post.getPaths()[0] + ".jpg"));
-//
-//        System.getProperties().put( "proxySet", "true" );
-//    }
 }

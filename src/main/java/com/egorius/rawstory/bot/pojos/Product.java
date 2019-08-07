@@ -7,7 +7,7 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class Product {
 
-    private long id = -1;
+    private long id = -1L;
 
     private String name;
 
@@ -24,6 +24,40 @@ public class Product {
     private int fats;
 
     private int carbohydrates;
+
+    public Product() {
+    }
+
+    public Product(long id, String name, String description, String[] paths, BigDecimal cost, int cal, int squirrels, int fats, int carbohydrates) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.paths = paths;
+        this.cost = cost;
+        this.cal = cal;
+        this.squirrels = squirrels;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+    }
+
+    public Product(String name, String description, String[] paths, BigDecimal cost, int cal, int squirrels, int fats, int carbohydrates) {
+        this.name = name;
+        this.description = description;
+        this.paths = paths;
+        this.cost = cost;
+        this.cal = cal;
+        this.squirrels = squirrels;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -89,17 +123,6 @@ public class Product {
         this.cal = cal;
     }
 
-    public Product(String name, String description, String[] paths, BigDecimal cost, int cal, int squirrels, int fats, int carbohydrates) {
-        this.name = name;
-        this.description = description;
-        this.paths = paths;
-        this.cost = cost;
-        this.cal = cal;
-        this.squirrels = squirrels;
-        this.fats = fats;
-        this.carbohydrates = carbohydrates;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,12 +148,12 @@ public class Product {
     @Override
     public String toString() {
         return "Продукт" +
-                "Название продукта:'" + name + '\'' +
-                "Описание продукта'" + description + '\'' +
-                "Цена:" + cost +
-                "Калории: " + cal +
-                "Белки: " + squirrels +
-                "Жиры: " + fats +
-                "Углеводы" + carbohydrates;
+                "\nНазвание продукта:'" + name + '\'' +
+                "\nОписание продукта'" + description + '\'' +
+                "\nЦена:" + cost +
+                "\nКалории: " + cal +
+                "\nБелки: " + squirrels +
+                "\nЖиры: " + fats +
+                "\nУглеводы" + carbohydrates;
     }
 }

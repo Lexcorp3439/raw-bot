@@ -58,6 +58,10 @@ public class Constructor {
         this.carbohydrates = carbohydrates;
     }
 
+    public boolean isProduct() {
+        return type == Type.Product;
+    }
+
     public String save() {
         switch (type) {
             case Post:
@@ -91,6 +95,6 @@ public class Constructor {
 
 
     public enum Type{
-        Post, Product, Null;
+        Post, Product, Null
     }
 }

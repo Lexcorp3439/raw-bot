@@ -29,7 +29,13 @@ public class MessageHandler {
     boolean name = false;
     boolean description = false;
     boolean images = false;
+    boolean cost = false;
+    boolean cal = false;
+    boolean squirrels = false;
+    boolean fats = false;
+    boolean carbohydrates= false;
     private boolean end = false;
+
 
     public MessageHandler(Long chatID) {
         System.out.println(chatID);
@@ -63,6 +69,23 @@ public class MessageHandler {
         if (!images) {
             return Step.images(this, msg);
         }
+        if (constructor.isProduct()) {
+            if (!cost) {
+                return Step.cost(this, msg);
+            }
+            if (!cal) {
+                return Step.cal(this, msg);
+            }
+            if (!squirrels) {
+                return Step.squirrels(this, msg);
+            }
+            if (!fats) {
+                return Step.fats(this, msg);
+            }
+            if (!carbohydrates) {
+                return Step.carbohydrates(this, msg);
+            }
+        }
         if (!end) {
             return Step.end(this, msg);
         }
@@ -75,9 +98,7 @@ public class MessageHandler {
                     .orElse(null)).getFileId();
             lastImages.add(id);
 
-            for (PhotoSize photo : photos) {
-                constructor.addImages(photo.getFileId());
-            }
+            constructor.addImages(id);
         }
     }
 
@@ -106,6 +127,11 @@ public class MessageHandler {
         name = false;
         description = false;
         images = false;
+        cost = false;
+        cal = false;
+        squirrels = false;
+        fats = false;
+        carbohydrates = false;
         end = false;
     }
 

@@ -9,12 +9,12 @@ import java.net.URL;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public enum  RequestRunner {
+public enum RequestRunner {
     Instance;
 
     private static final int CONNECTION_TIMEOUT = 0;
 
-    public InputStream doPost(String u, Object object) throws Exception{
+    public Object doPost(String u, Object object, Class<?> clazz) throws Exception {
         URL url = new URL(u);
         final HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
@@ -32,13 +32,13 @@ public enum  RequestRunner {
         out.flush();
         out.close();
 
-        InputStream stream = con.getInputStream();
+        Object ans = mapper.readValue(con.getInputStream(), clazz);
         con.disconnect();
 
-        return stream;
+        return ans;
     }
 
-    public InputStream doPut(String u) throws Exception{
+    public String doPut(String u) throws Exception {
         URL url = new URL(u);
         final HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("PUT");
@@ -46,9 +46,9 @@ public enum  RequestRunner {
         con.setConnectTimeout(CONNECTION_TIMEOUT);
         con.setReadTimeout(CONNECTION_TIMEOUT);
 
-        InputStream input = con.getInputStream();
+        ObjectMapper mapper = new ObjectMapper();
+        String ans = mapper.readValue(con.getInputStream(), String.class);
         con.disconnect();
-
-        return input;
+        return ans;
     }
 }

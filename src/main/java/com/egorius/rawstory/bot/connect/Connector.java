@@ -20,11 +20,8 @@ public class Connector {
     public static Request sendPost(Post post) {
         Properties.removeProxy();
         Post ans;
-        try(InputStream input = RequestRunner.Instance.doPost(testURLtoPost, post)) {
-            ObjectMapper mapper = new ObjectMapper();
-
-            ans = mapper.readValue(input, Post.class);
-            System.out.println("Good");
+        try {
+            ans = (Post) RequestRunner.Instance.doPost(testURLtoPost, post, Post.class);
         } catch (Exception e) {
             return new Request.Failed(e.getMessage());
         }
@@ -35,22 +32,27 @@ public class Connector {
     public static Request sendProduct(Product product) {
         Properties.removeProxy();
         Product ans;
-        try(InputStream input = RequestRunner.Instance.doPost(testURLtoProduct, product)) {
-            ObjectMapper mapper = new ObjectMapper();
 
-            ans = mapper.readValue(input, Product.class);
-
+        try {
+            ans = (Product) RequestRunner.Instance.doPost(testURLtoProduct, product, Product.class);
         } catch (Exception e) {
+            e.printStackTrace();
             return new Request.Failed(e.getMessage());
         }
+
         Properties.setProxy();
         return new Request.Success(ans);
     }
 
+
+    @SuppressWarnings("UnusedReturnValue") // Выходной параметр нужен в дальнейшем!
     public static Request putChatId(Long chatId) {
         Properties.removeProxy();
         try {
-            RequestRunner.Instance.doPut(testURLPutChatID.concat(String.valueOf(chatId)));
+            String ans = RequestRunner.Instance.doPut(testURLPutChatID.concat(String.valueOf(chatId)));
+            if (!ans.equals(Long.toString(chatId))) {
+                return new Request.Failed("Переданный ID - не число");
+            }
         } catch (Exception e) {
             return new Request.Failed(e.getMessage());
         }
